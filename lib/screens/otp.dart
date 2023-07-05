@@ -13,7 +13,7 @@ class OtpPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'Welcome',
+              'Welcome Winston',
               style: TextStyle(
                 color: primaryColor,
                 fontSize: 43,
