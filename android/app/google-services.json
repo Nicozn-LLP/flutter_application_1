@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "262476446230",
+    "project_id": "rental-easy-51aa1",
+    "storage_bucket": "rental-easy-51aa1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262476446230:android:e8a74d038a437012735337",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262476446230-2hsnte5d5nj0i4jkjg7v2pet4tbfvt0l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJpu88mDauGrrfXaXzCSFpmYumtGlfo-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "262476446230-2hsnte5d5nj0i4jkjg7v2pet4tbfvt0l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "262476446230-ikanjpu1icbr7b83953uf6jrrvtfgv42.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterApplication1.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
