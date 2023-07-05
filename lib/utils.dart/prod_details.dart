@@ -76,7 +76,7 @@ class ItemContainer extends StatelessWidget {
               ),
             ),
             Positioned(
-              left: 27,
+              left: 20,
               top: 429,
               child: Text(
                 'Specifications',
