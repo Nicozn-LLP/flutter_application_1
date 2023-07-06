@@ -19,7 +19,7 @@ class Addpost extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 24),
+          const SizedBox(height: 50),
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
@@ -452,7 +452,7 @@ class Addpost extends StatelessWidget {
                     style: ButtonStyle(
                       minimumSize: MaterialStateProperty.all<Size>(
                         const Size(double.infinity,
-                            56), // Set the width and height of the button
+                            50), // Set the width and height of the button
                       ),
                       backgroundColor: MaterialStateProperty.all<Color>(
                           const Color(0xFF005851)),

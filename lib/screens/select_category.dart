@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/styles.dart';
 
 import 'add_post.dart';
 
@@ -39,14 +40,14 @@ class SelectCategory extends StatelessWidget {
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
-                crossAxisSpacing: 20,
+                crossAxisSpacing: 15,
                 mainAxisSpacing: 16,
                 childAspectRatio: 1,
                 children: [
                   CategoryBox(
                     label: 'Cars',
                     image: 'assets/png/cars.png',
-                    cardColor: Colors.lightBlue, // Set color to blue
+                    cardColor: primaryColor, // Set color to blue
                     textColor: Colors.white,
                     onTap: () {
                       Navigator.push(
@@ -58,7 +59,7 @@ class SelectCategory extends StatelessWidget {
                   CategoryBox(
                     label: 'Bike',
                     image: 'assets/png/bike.png',
-                    cardColor: Colors.blue, // Set color to yellow
+                    cardColor: primaryColor, // Set color to yellow
                     textColor: Colors.white,
                     onTap: () {
                       Navigator.push(
@@ -70,7 +71,7 @@ class SelectCategory extends StatelessWidget {
                   CategoryBox(
                     label: 'Apparels',
                     image: 'assets/png/apparels.png',
-                    cardColor: Colors.blueAccent, // Set color to green
+                    cardColor: primaryColor, // Set color to green
                     textColor: Colors.white,
                     onTap: () {
                       Navigator.push(
@@ -82,7 +83,7 @@ class SelectCategory extends StatelessWidget {
                   CategoryBox(
                     label: 'Accessories',
                     image: 'assets/png/accessories.png',
-                    cardColor: Colors.blue, // Set color to red
+                    cardColor: primaryColor, // Set color to red
                     textColor: Colors.white,
                     onTap: () {
                       Navigator.push(
@@ -94,7 +95,7 @@ class SelectCategory extends StatelessWidget {
                   CategoryBox(
                     label: 'Services',
                     image: 'assets/png/services.png',
-                    cardColor: Colors.blue, // Set color to brown
+                    cardColor: primaryColor, // Set color to brown
                     textColor: Colors.white,
                     onTap: () {
                       Navigator.push(
@@ -106,7 +107,7 @@ class SelectCategory extends StatelessWidget {
                   CategoryBox(
                     label: 'Events',
                     image: 'assets/png/event.png',
-                    cardColor: Colors.blue, // Set color to pink
+                    cardColor: primaryColor, // Set color to pink
                     textColor: Colors.white,
                     onTap: () {
                       Navigator.push(
