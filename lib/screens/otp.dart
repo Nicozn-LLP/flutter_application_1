@@ -16,7 +16,7 @@ class OtpPage extends StatelessWidget {
               'Welcome Winston',
               style: TextStyle(
                 color: primaryColor,
-                fontSize: 43,
+                fontSize: 35,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -29,7 +29,7 @@ class OtpPage extends StatelessWidget {
                 foregroundColor: Colors.white,
                 backgroundColor: primaryColor,
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 130, vertical: 20),
+                    const EdgeInsets.symmetric(horizontal: 80, vertical: 20),
                 textStyle: const TextStyle(fontSize: 14),
               ),
               onPressed: () {
@@ -49,7 +49,7 @@ class NextPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(40.0),
+        padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -65,61 +65,53 @@ class NextPage extends StatelessWidget {
               ),
               child: const Icon(Icons.arrow_back),
             ),
-            Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 16.0),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Enter your phone number',
-                      style: TextStyle(fontSize: 14.0),
-                    ),
-                  ),
-                  const SizedBox(height: 10.0),
-                  Container(
-                    width: 325,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.grey,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: TextField(
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 14),
-                        hintText: 'Enter phone number',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  Align(
-                    alignment: Alignment.center,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: primaryColor,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 134, vertical: 20),
-                        textStyle: const TextStyle(fontSize: 14),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => OTPPage()),
-                        );
-                      },
-                      child: const Text('Get OTP'),
-                    ),
-                  ),
-                ],
+            const SizedBox(height: 16.0),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Enter your phone number',
+                style: TextStyle(fontSize: 14.0),
+              ),
+            ),
+            const SizedBox(height: 10.0),
+            Container(
+              width: 325,
+              height: 50,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: TextField(
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+                  hintText: 'Enter phone number',
+                ),
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            Align(
+              alignment: Alignment.center,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: primaryColor,
+                  foregroundColor: Colors.white,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 80, vertical: 20),
+                  textStyle: const TextStyle(fontSize: 14),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => OTPPage()),
+                  );
+                },
+                child: const Text('Get OTP'),
               ),
             ),
           ],
@@ -134,7 +126,7 @@ class OTPPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(40.0),
+        padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -171,7 +163,7 @@ class OTPPage extends StatelessWidget {
                   foregroundColor: Colors.white,
                   backgroundColor: primaryColor,
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 134, vertical: 20),
+                      const EdgeInsets.symmetric(horizontal: 80, vertical: 20),
                   textStyle: const TextStyle(fontSize: 14),
                 ),
                 onPressed: () {
@@ -219,7 +211,7 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(40.0),
+        padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -359,7 +351,7 @@ class RegisterPage extends StatelessWidget {
                   backgroundColor: primaryColor,
                   foregroundColor: Colors.white,
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 134, vertical: 20),
+                      const EdgeInsets.symmetric(horizontal: 80, vertical: 20),
                   textStyle: const TextStyle(fontSize: 14),
                 ),
                 onPressed: () {

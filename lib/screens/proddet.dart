@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/contact.dart';
 import 'package:flutter_application_1/screens/styles.dart';
 
+import 'contact.dart';
+
 class Proddet extends StatelessWidget {
+  const Proddet({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
