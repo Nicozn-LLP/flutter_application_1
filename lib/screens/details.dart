@@ -27,7 +27,7 @@ class Details extends StatelessWidget {
             Positioned(
               width: 120,
               height: 120,
-              left: 200 - 120 / 2,
+              left: 180 - 120 / 2,
               top: 116, // Adjusted value
               child: Container(
                 decoration: BoxDecoration(
@@ -43,7 +43,7 @@ class Details extends StatelessWidget {
             Positioned(
               width: 102,
               height: 18,
-              left: 200 - 102 / 2,
+              left: 180 - 102 / 2,
               top: 253, // Adjusted value
               child: Text(
                 'Change photo',
@@ -118,7 +118,7 @@ class Details extends StatelessWidget {
             Positioned(
               width: 320,
               height: 50,
-              left: 38,
+              left: 20,
               top: 326, // Adjusted value
               child: TextField(
                 decoration: InputDecoration(
@@ -132,7 +132,7 @@ class Details extends StatelessWidget {
             Positioned(
               width: 320,
               height: 50,
-              left: 38,
+              left: 20,
               top: 501, // Adjusted value
               child: TextField(
                 decoration: InputDecoration(
@@ -146,7 +146,7 @@ class Details extends StatelessWidget {
             Positioned(
               width: 320,
               height: 50,
-              left: 38,
+              left: 20,
               top: 414, // Adjusted value
               child: TextFormField(
                 decoration: InputDecoration(
@@ -160,7 +160,7 @@ class Details extends StatelessWidget {
             Positioned(
               width: 320,
               height: 50,
-              left: 38,
+              left: 20,
               top: 591, // Adjusted value
               child: TextField(
                 decoration: InputDecoration(
@@ -174,7 +174,7 @@ class Details extends StatelessWidget {
             Positioned(
               width: 24,
               height: 24,
-              left: 320,
+              left: 300,
               top: 601, // Adjusted value
               child: Icon(
                 Icons.calendar_today,
@@ -184,7 +184,7 @@ class Details extends StatelessWidget {
             Positioned(
               width: 318.26,
               height: 50,
-              left: 198 - 318.26 / 2 + 0.13,
+              left: 180 - 318.26 / 2 + 0.13,
               top: 666, // Adjusted value
               child: Container(
                 child: ElevatedButton(
