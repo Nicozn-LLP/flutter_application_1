@@ -26,7 +26,7 @@ class ItemContainer extends StatelessWidget {
             },
             child: Container(
               margin: EdgeInsets.all(11),
-              width: 183,
+              width: 158,
               height: 180,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -68,7 +68,7 @@ class ItemContainer extends StatelessWidget {
             },
             child: Container(
               margin: EdgeInsets.all(11),
-              width: 183,
+              width: 158,
               height: 180,
               decoration: BoxDecoration(
                 color: Colors.white,

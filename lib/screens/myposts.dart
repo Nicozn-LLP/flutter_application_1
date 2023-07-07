@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/styles.dart';
 
 import '../itrm_details.dart';
 
-class FavouriteScreen extends StatelessWidget {
-  const FavouriteScreen({Key? key}) : super(key: key);
+class Myposts extends StatelessWidget {
+  const Myposts({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,30 +39,45 @@ class FavouriteScreen extends StatelessWidget {
     ));
 
     return Scaffold(
-      body: Container(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 0, top: 20),
-              child: Text(
-                'My Favourites!',
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.bold, // Make the text bold
-                  fontSize: 25,
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 40.0),
+            child: Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(primaryColor),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    )),
+                  ),
+                  child: const Icon(Icons.arrow_back),
                 ),
+                SizedBox(width: 10),
+                Text(
+                  'My Posts!',
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                children: items,
               ),
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  children: items,
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

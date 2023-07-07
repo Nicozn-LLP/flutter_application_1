@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/about.dart';
 import 'package:flutter_application_1/screens/details.dart';
+import 'package:flutter_application_1/screens/myposts.dart';
 import 'package:flutter_application_1/screens/otp.dart';
 import 'package:flutter_application_1/screens/privacypolicy.dart';
 import 'package:flutter_application_1/screens/styles.dart';
@@ -14,9 +15,6 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 500,
-      height: 700,
-      color: const Color(0xFFFFFFFF),
       child: Stack(
         children: [
           Positioned(
@@ -75,10 +73,10 @@ class ProfileScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Details()),
+                    MaterialPageRoute(builder: (context) => Myposts()),
                   );
                 },
-                child: Text('Account'),
+                child: Text('My Posts'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.black,
                 ),

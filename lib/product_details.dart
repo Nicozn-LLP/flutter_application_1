@@ -1,16 +1,17 @@
+// TODO Implement this library.
 import 'package:flutter/material.dart';
 
 import '../screens/contact.dart';
 import '../screens/styles.dart';
 
-class Productdetail extends StatelessWidget {
+class Productdetails extends StatelessWidget {
   final String imageUrl1;
   final String model;
   final String brand;
   final String fuel;
   final String features;
   final String price;
-  const Productdetail(
+  const Productdetails(
       {Key? key,
       required this.imageUrl1,
       required this.model,
