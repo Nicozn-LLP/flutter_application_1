@@ -461,7 +461,7 @@ class RegisterPage extends StatelessWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: primaryColor,
-                    foregroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 80, vertical: 20),
                     textStyle: const TextStyle(fontSize: 14),
