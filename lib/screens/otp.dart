@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/styles.dart';
 import 'package:lottie/lottie.dart';
+
 import 'bbar.dart';
 
 class OtpPage extends StatelessWidget {
@@ -91,7 +92,8 @@ class NextPage extends StatelessWidget {
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 10, vertical: 14),
                     hintText: 'Enter phone number',
                   ),
                   validator: (value) {
@@ -111,7 +113,8 @@ class NextPage extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: primaryColor,
                     foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 80, vertical: 20),
                     textStyle: const TextStyle(fontSize: 14),
                   ),
                   onPressed: () {
@@ -132,6 +135,7 @@ class NextPage extends StatelessWidget {
     );
   }
 }
+
 bool isValidPhoneNumber(String value) {
   // Define your phone number validation logic here
   // Return true if the phone number is valid, false otherwise
@@ -222,8 +226,8 @@ class OTPPage extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: primaryColor,
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 80, vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 80, vertical: 20),
                     textStyle: const TextStyle(fontSize: 14),
                   ),
                   onPressed: () {
@@ -457,8 +461,9 @@ class RegisterPage extends StatelessWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: primaryColor,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 20),
+                    foregroundColor: Colors.blue,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 80, vertical: 20),
                     textStyle: const TextStyle(fontSize: 14),
                   ),
                   onPressed: () {
@@ -484,7 +489,8 @@ class RegisterPage extends StatelessWidget {
 bool isValidEmail(String value) {
   // Define your email validation logic here
   // Return true if the email address is valid, false otherwise
-  final emailRegex = r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$';
+  final emailRegex =
+      r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$';
   final RegExp regex = RegExp(emailRegex);
   return regex.hasMatch(value);
 }
