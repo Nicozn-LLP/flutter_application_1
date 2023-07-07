@@ -1,17 +1,32 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/styles.dart';
+import 'package:flutter_application_1/screens/utilss.dart';
 
-class Details extends StatelessWidget {
+class Details extends StatefulWidget {
+  @override
+  State<Details> createState() => _DetailsState();
+}
+
+class _DetailsState extends State<Details> {
+  File? image;
+
+  void selectImage() async {
+    image = await pickImage(context);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Stack(
-          children: [
-            Positioned(
-              top: 40,
-              left: 2,
-              child: ElevatedButton(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -23,182 +38,162 @@ class Details extends StatelessWidget {
                 ),
                 child: const Icon(Icons.arrow_back),
               ),
-            ),
-            Positioned(
-              width: 120,
-              height: 120,
-              left: 180 - 120 / 2,
-              top: 116, // Adjusted value
-              child: Container(
+              const SizedBox(height: 16.0),
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  'Choose Photo',
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+              const SizedBox(height: 16.0),
+              Align(
+                alignment: Alignment.center,
+                child: InkWell(
+                  onTap: () => selectImage(),
+                  child: image == null
+                      ? const CircleAvatar(
+                          backgroundColor: primaryColor,
+                          radius: 50,
+                          child: Icon(
+                            Icons.account_circle,
+                            size: 50,
+                            color: Colors.white,
+                          ),
+                        )
+                      : CircleAvatar(
+                          backgroundImage: FileImage(image!),
+                          radius: 50,
+                        ),
+                ),
+              ),
+              const SizedBox(height: 16.0),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'First Name',
+                  style: TextStyle(fontSize: 14.0),
+                ),
+              ),
+              const SizedBox(height: 10.0),
+              Container(
+                width: 325,
+                height: 50,
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.grey,
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/photo.jpg'),
-                    fit: BoxFit.cover,
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: TextField(
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              width: 102,
-              height: 18,
-              left: 180 - 102 / 2,
-              top: 253, // Adjusted value
-              child: Text(
-                'Change photo',
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                  color: Colors.black,
+              const SizedBox(height: 16.0),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Last Name',
+                  style: TextStyle(fontSize: 14.0),
                 ),
               ),
-            ),
-            Positioned(
-              width: 66,
-              height: 16,
-              left: 38,
-              top: 293, // Adjusted value
-              child: Text(
-                'Name',
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                  color: Colors.black,
+              const SizedBox(height: 10.0),
+              Container(
+                width: 325,
+                height: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
                 ),
-              ),
-            ),
-            Positioned(
-              width: 123,
-              height: 16,
-              left: 38,
-              top: 381, // Adjusted value
-              child: Text(
-                'Second Name',
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            Positioned(
-              width: 123,
-              height: 16,
-              left: 38,
-              top: 469, // Adjusted value
-              child: Text(
-                'Phone number',
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            Positioned(
-              width: 123,
-              height: 16,
-              left: 38,
-              top: 559, // Adjusted value
-              child: Text(
-                'Date of birth',
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            Positioned(
-              width: 320,
-              height: 50,
-              left: 20,
-              top: 326, // Adjusted value
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                child: TextField(
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
                   ),
                 ),
-                controller: TextEditingController(text: ''),
               ),
-            ),
-            Positioned(
-              width: 320,
-              height: 50,
-              left: 20,
-              top: 501, // Adjusted value
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+              const SizedBox(height: 16.0),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Date of birth',
+                  style: TextStyle(fontSize: 14.0),
+                ),
+              ),
+              const SizedBox(height: 10.0),
+              Container(
+                width: 325,
+                height: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: TextField(
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
                   ),
                 ),
-                controller: TextEditingController(text: ''),
               ),
-            ),
-            Positioned(
-              width: 320,
-              height: 50,
-              left: 20,
-              top: 414, // Adjusted value
-              child: TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+              const SizedBox(height: 16.0),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Email ID',
+                  style: TextStyle(fontSize: 14.0),
+                ),
+              ),
+              const SizedBox(height: 10.0),
+              Container(
+                width: 325,
+                height: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: TextField(
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
                   ),
                 ),
-                controller: TextEditingController(text: ''),
               ),
-            ),
-            Positioned(
-              width: 320,
-              height: 50,
-              left: 20,
-              top: 591, // Adjusted value
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                controller: TextEditingController(text: ''),
-              ),
-            ),
-            Positioned(
-              width: 24,
-              height: 24,
-              left: 300,
-              top: 601, // Adjusted value
-              child: Icon(
-                Icons.calendar_today,
-                color: Colors.black,
-              ),
-            ),
-            Positioned(
-              width: 318.26,
-              height: 50,
-              left: 180 - 318.26 / 2 + 0.13,
-              top: 666, // Adjusted value
-              child: Container(
+              const SizedBox(height: 16.0),
+              Align(
+                alignment: Alignment.center,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: primaryColor,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 80, vertical: 20),
+                    textStyle: const TextStyle(fontSize: 14),
+                  ),
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('Save'),
-                  style: ElevatedButton.styleFrom(
-                    primary: primaryColor,
-                  ),
+                  child: const Text('Save'),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

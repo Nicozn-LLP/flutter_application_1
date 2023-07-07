@@ -40,8 +40,8 @@ class SelectCategory extends StatelessWidget {
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 16,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 20,
                 childAspectRatio: 1,
                 children: [
                   CategoryBox(
@@ -166,7 +166,6 @@ class CategoryBox extends StatelessWidget {
               height: 110,
               fit: BoxFit.cover,
             ),
-            const SizedBox(height: 8),
             Text(
               label,
               style: TextStyle(
