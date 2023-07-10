@@ -261,7 +261,7 @@ class Proddet extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Contact()),
+                    MaterialPageRoute(builder: (context) => Slide()),
                   ); // Handle button click event
                 },
                 style: ElevatedButton.styleFrom(

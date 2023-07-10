@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../itrm_details.dart';
+import 'contact.dart';
 
 class FeaturedScreen extends StatelessWidget {
   const FeaturedScreen({Key? key}) : super(key: key);
@@ -31,9 +32,13 @@ class FeaturedScreen extends StatelessWidget {
     ));
 
     return SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: items,
-        ));
+      scrollDirection: Axis.vertical,
+      child: Column(
+        children: [
+          Slide(), // Add the Slide widget here
+          ...items,
+        ],
+      ),
+    );
   }
 }
