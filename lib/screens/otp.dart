@@ -409,7 +409,7 @@ class RegisterPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: TextFormField(
-                    keyboardType: TextInputType.datetime,
+                    keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.symmetric(horizontal: 10),

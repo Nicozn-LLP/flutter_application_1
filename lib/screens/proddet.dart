@@ -61,7 +61,7 @@ class Proddet extends StatelessWidget {
               left: 20,
               top: 210,
               child: Container(
-                width: 370,
+                width: 320,
                 height: 200,
                 decoration: BoxDecoration(
                   color: Colors.grey,
@@ -215,7 +215,7 @@ class Proddet extends StatelessWidget {
               left: 0,
               top: 712,
               child: Container(
-                width: 412,
+                width: 370,
                 height: 100,
                 color: Color(0xFF16161A),
               ),
@@ -255,7 +255,7 @@ class Proddet extends StatelessWidget {
               ),
             ),
             Positioned(
-              left: 238,
+              left: 200,
               top: 732,
               child: ElevatedButton(
                 onPressed: () {
