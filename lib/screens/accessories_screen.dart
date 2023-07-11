@@ -13,21 +13,24 @@ class AccessoriesScreen extends StatelessWidget {
           'https://images.pexels.com/photos/339379/pexels-photo-339379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       imageUrl2:
           'https://images.pexels.com/photos/339379/pexels-photo-339379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      name: '',
+      name1: '',
+      name2: '',
     ));
     items.add(ItemContainer(
       imageUrl1:
           'https://images.pexels.com/photos/339379/pexels-photo-339379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       imageUrl2:
           'https://images.pexels.com/photos/339379/pexels-photo-339379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      name: '',
+      name1: '',
+      name2: '',
     ));
     items.add(ItemContainer(
       imageUrl1:
           'https://images.pexels.com/photos/339379/pexels-photo-339379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       imageUrl2:
           'https://images.pexels.com/photos/339379/pexels-photo-339379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      name: '',
+      name1: '',
+      name2: '',
     ));
 
     return SingleChildScrollView(

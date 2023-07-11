@@ -4,12 +4,14 @@ import 'package:flutter_application_1/screens/proddet.dart';
 class ItemContainer extends StatelessWidget {
   final String imageUrl1;
   final String imageUrl2;
-  final String name;
+  final String name1;
+  final String name2;
   const ItemContainer(
       {Key? key,
       required this.imageUrl1,
       required this.imageUrl2,
-      required this.name})
+      required this.name1,
+      required this.name2})
       : super(key: key);
 
   @override
@@ -48,7 +50,7 @@ class ItemContainer extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    name,
+                    name1,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -90,7 +92,7 @@ class ItemContainer extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    name,
+                    name2,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

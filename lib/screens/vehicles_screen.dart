@@ -13,21 +13,24 @@ class VehiclesScreen extends StatelessWidget {
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLxSkwhfRx5n1mZP1EgH04eqfpBgFqjy4B-w&usqp=CAU',
       imageUrl2:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu550bxZtiD_tkCLgKT0Lib_Xr80A5a0U-zw&usqp=CAU',
-      name: '',
+      name1: '',
+      name2: '',
     ));
     items.add(ItemContainer(
       imageUrl1:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLxSkwhfRx5n1mZP1EgH04eqfpBgFqjy4B-w&usqp=CAU',
       imageUrl2:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu550bxZtiD_tkCLgKT0Lib_Xr80A5a0U-zw&usqp=CAU',
-      name: '',
+      name1: '',
+      name2: '',
     ));
     items.add(ItemContainer(
       imageUrl1:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLxSkwhfRx5n1mZP1EgH04eqfpBgFqjy4B-w&usqp=CAU',
       imageUrl2:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu550bxZtiD_tkCLgKT0Lib_Xr80A5a0U-zw&usqp=CAU',
-      name: '',
+      name1: '',
+      name2: '',
     ));
 
     return SingleChildScrollView(
