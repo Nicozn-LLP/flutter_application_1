@@ -39,7 +39,6 @@ class _SliderState extends State<Slide> {
     'assets/png/fashion2.png',
     'assets/png/electronics2.png',
   ];
-
   @override
   void initState() {
     super.initState();
