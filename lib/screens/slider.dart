@@ -28,9 +28,16 @@ class Slide extends StatefulWidget {
 class _SliderState extends State<Slide> {
   int _currentIndex = 0;
   List<String> _imageList = [
-    'assets/jpg/image1.jpg',
-    'assets/jpg/image2.jpg',
-    'assets/jpg/image3.jpg',
+    'assets/png/fashion.png',
+    'assets/png/electronics.png',
+    'assets/png/vehicles.png',
+    'assets/png/accessory.png',
+    'assets/png/fashion1.png',
+    'assets/png/electronics1.png',
+    'assets/png/vehicles1.png',
+    'assets/png/accessory1.png',
+    'assets/png/fashion2.png',
+    'assets/png/electronics2.png',
   ];
 
   @override
