@@ -102,7 +102,7 @@ class _MyOtpState extends State<MyOtp> {
                   style: ElevatedButton.styleFrom(
                       primary: primaryColor,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(11))),
+                          borderRadius: BorderRadius.circular(10))),
                 ),
               ),
               Row(
