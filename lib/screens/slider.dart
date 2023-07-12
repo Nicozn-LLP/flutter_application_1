@@ -46,7 +46,7 @@ class _SliderState extends State<Slide> {
   }
 
   void startTimer() {
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(Duration(seconds: 3), () {
       setState(() {
         _currentIndex = (_currentIndex + 1) % _imageList.length;
       });
@@ -75,7 +75,7 @@ class _SliderState extends State<Slide> {
     return Container(
       width: sliderWidth,
       height: sliderHeight,
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: 0),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -102,7 +102,7 @@ class _SliderState extends State<Slide> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 _imageList.length,
-                    (index) => buildIndicator(index),
+                (index) => buildIndicator(index),
               ),
             ),
           ),
