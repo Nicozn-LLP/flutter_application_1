@@ -110,7 +110,7 @@ class _MyPhoneState extends State<MyPhone> {
                       foregroundColor: Colors.white,
                       backgroundColor: primaryColor,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
+                          borderRadius: BorderRadius.circular(11))),
                 ),
               )
             ],

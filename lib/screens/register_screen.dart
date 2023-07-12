@@ -154,7 +154,7 @@ class RegisterPage extends StatelessWidget {
                       color: Colors.grey,
                       width: 2,
                     ),
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(11),
                   ),
                   child: TextFormField(
                     keyboardType: TextInputType.emailAddress,

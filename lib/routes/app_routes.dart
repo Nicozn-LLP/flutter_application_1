@@ -26,5 +26,6 @@ class AppRoutes {
     }
   }
 
+
   static _getMaterialRoute(Widget page) => MaterialPageRoute(builder: (BuildContext context) => page);
 }
