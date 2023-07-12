@@ -7,7 +7,8 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Container(
+        margin: EdgeInsets.only(left: 25, right: 25),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -15,7 +16,7 @@ class WelcomePage extends StatelessWidget {
               'Welcome',
               style: TextStyle(
                 color: primaryColor,
-                fontSize: 35,
+                fontSize: 50,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -23,19 +24,21 @@ class WelcomePage extends StatelessWidget {
             Lottie.network(
                 'https://assets3.lottiefiles.com/packages/lf20_3mcu1lCXFW.json'),
             const SizedBox(height: 16),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: primaryColor,
-                padding:
-                const EdgeInsets.symmetric(horizontal: 80, vertical: 20),
-                textStyle: const TextStyle(fontSize: 14),
+            SizedBox(
+              height: 45,
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoutes.phone);
+                },
+                child: Text("Let's get started"),
+                style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: primaryColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10))),
               ),
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.phone);
-              },
-              child: const Text("Let's get started"),
-            ),
+            )
           ],
         ),
       ),

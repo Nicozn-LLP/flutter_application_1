@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'bbar.dart';
+import 'bottom_bar.dart';
 
 // ignore: camel_case_types, must_be_immutable
 class Addpost extends StatelessWidget {
@@ -452,7 +452,7 @@ class Addpost extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Bbar()),
+                          MaterialPageRoute(builder: (context) => Bottombar()),
                         ); // Perform action on button press
                       },
                       style: ButtonStyle(

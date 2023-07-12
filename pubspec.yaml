@@ -36,13 +36,14 @@ dependencies:
   pinput: ^2.2.31
 
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   circular_bottom_navigation: ^2.3.0
   lottie: ^2.0.0
   cloud_firestore: ^4.8.2
+  firebase_core: ^2.14.0
+  firebase_auth: ^4.6.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

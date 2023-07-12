@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/routes/app_routes.dart';
 import 'package:flutter_application_1/screens/styles.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
-import 'bbar.dart';
+
+import '../routes/app_routes.dart';
 
 class MyOtp extends StatefulWidget {
   const MyOtp({Key? key}) : super(key: key);
@@ -91,10 +91,13 @@ class _MyOtpState extends State<MyOtp> {
                 height: 45,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppRoutes.register);
+                  },
                   child: Text('Verify phone number'),
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.green.shade600,
+                      foregroundColor: Colors.white,
+                      backgroundColor: primaryColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
                 ),
