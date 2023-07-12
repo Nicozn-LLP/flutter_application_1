@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/slider.dart';
 import 'package:flutter_application_1/screens/styles.dart';
+
+import 'contact.dart';
 
 class Proddet extends StatelessWidget {
   const Proddet({Key? key}) : super(key: key);
@@ -74,21 +75,7 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 20,
-              top: 429,
-              child: Text(
-                'Specifications',
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18,
-                  letterSpacing: 0.02,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            Positioned(
-              left: 20,
-              top: 571,
+              top: 450,
               child: Text(
                 'Car Features',
                 style: TextStyle(
@@ -101,48 +88,8 @@ class Proddet extends StatelessWidget {
               ),
             ),
             Positioned(
-              left: 20,
-              top: 472,
-              child: Container(
-                width: 77,
-                height: 76,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blueGrey, width: 2),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 29,
-              top: 512,
-              child: Text(
-                'Fuel',
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 10,
-                  letterSpacing: 0.02,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            Positioned(
-              left: 29,
-              top: 528,
-              child: Text(
-                '550 km',
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 10,
-                  letterSpacing: 0.02,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            Positioned(
               left: 44,
-              top: 614,
+              top: 493,
               child: Text(
                 '5 Passengers',
                 style: TextStyle(
@@ -156,7 +103,7 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 44,
-              top: 678,
+              top: 527,
               child: Text(
                 'Bluetooth',
                 style: TextStyle(
@@ -170,7 +117,7 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 217,
-              top: 614,
+              top: 493,
               child: Text(
                 '4 Doors',
                 style: TextStyle(
@@ -184,7 +131,7 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 217,
-              top: 646,
+              top: 525,
               child: Text(
                 'GPS',
                 style: TextStyle(
@@ -198,7 +145,7 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 44,
-              top: 646,
+              top: 559,
               child: Text(
                 'Manual',
                 style: TextStyle(
@@ -212,16 +159,16 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 0,
-              top: 712,
+              top: 625,
               child: Container(
-                width: 370,
+                width: 360,
                 height: 100,
                 color: Color(0xFF16161A),
               ),
             ),
             Positioned(
               left: 20,
-              top: 734,
+              top: 650,
               child: Container(
                 width: 99,
                 height: 47,
@@ -255,12 +202,15 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 200,
-              top: 732,
+              top: 650,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Slide()),
+                    MaterialPageRoute(
+                        builder: (context) => Contact(
+                              phoneNumber: '8097147818',
+                            )),
                   ); // Handle button click event
                 },
                 style: ElevatedButton.styleFrom(
