@@ -23,7 +23,7 @@ class Bottombar extends StatelessWidget {
         child: Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.black,
-              title: Text("Rent-Hub"),
+              title: Text("RentEasy"),
               actions: <Widget>[
                 IconButton(
                   alignment: Alignment.center,
