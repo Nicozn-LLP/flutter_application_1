@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/bbar.dart';
+import 'package:flutter_application_1/screens/bottom_bar.dart';
 import 'package:flutter_application_1/screens/otp_screen.dart';
 import 'package:flutter_application_1/screens/styles.dart';
 
@@ -9,6 +9,18 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.black,
+            )),
+      ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0),
         child: SingleChildScrollView(
@@ -17,25 +29,13 @@ class RegisterPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(primaryColor),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    )),
-                  ),
-                  child: const Icon(Icons.arrow_back),
-                ),
                 const SizedBox(height: 16.0),
                 Align(
                   alignment: Alignment.center,
                   child: Text(
                     'Register',
                     style:
-                    TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(height: 16.0),
@@ -175,24 +175,25 @@ class RegisterPage extends StatelessWidget {
                 const SizedBox(height: 16.0),
                 Align(
                   alignment: Alignment.center,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 80, vertical: 20),
-                      textStyle: const TextStyle(fontSize: 14),
+                  child: SizedBox(
+                    height: 45,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Bottombar()),
+                          );
+                        }
+                      },
+                      child: Text('Continue'),
+                      style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: primaryColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
                     ),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Bbar()),
-                        );
-                        // Perform registration logic here
-                      }
-                    },
-                    child: const Text('Continue'),
                   ),
                 ),
               ],

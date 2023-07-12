@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_application_1/routes/app_routes.dart';
-import 'package:flutter_application_1/screens/otp_screen.dart';
+
 
 void main() => runApp(MyApp());
 

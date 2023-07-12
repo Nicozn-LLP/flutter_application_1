@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/routes/app_routes.dart';
+import 'package:flutter_application_1/screens/styles.dart';
 import 'package:lottie/lottie.dart';
 
 class MyPhone extends StatefulWidget {
@@ -106,7 +107,8 @@ class _MyPhoneState extends State<MyPhone> {
                   },
                   child: Text('Send the code'),
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.green.shade600,
+                      foregroundColor: Colors.white,
+                      backgroundColor: primaryColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
                 ),

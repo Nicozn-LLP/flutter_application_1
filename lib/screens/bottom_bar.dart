@@ -7,7 +7,7 @@ import 'package:flutter_application_1/screens/rent_screen.dart';
 import 'favourite_screen.dart';
 import 'home_screen.dart';
 
-class Bbar extends StatelessWidget {
+class Bottombar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
