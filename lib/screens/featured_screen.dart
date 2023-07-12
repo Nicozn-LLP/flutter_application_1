@@ -35,13 +35,14 @@ class FeaturedScreen extends StatelessWidget {
     ));
 
     return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(
-        children: [
-          Slide(), // Add the Slide widget here
-          ...items,
-        ],
-      ),
-    );
+        scrollDirection: Axis.vertical,
+        child: Center(
+          child: Column(
+            children: [
+              Slide(), // Add the Slide widget here
+              ...items,
+            ],
+          ),
+        ));
   }
 }
