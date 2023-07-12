@@ -24,6 +24,7 @@ class RegisterPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0),
         child: SingleChildScrollView(
+            child: Center(
           child: Form(
             key: _formKey,
             child: Column(
@@ -200,7 +201,7 @@ class RegisterPage extends StatelessWidget {
               ],
             ),
           ),
-        ),
+        )),
       ),
     );
   }

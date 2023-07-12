@@ -35,8 +35,9 @@ class FashionScreen extends StatelessWidget {
 
     return SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Column(
+        child: Center(
+            child: Column(
           children: items,
-        ));
+        )));
   }
 }

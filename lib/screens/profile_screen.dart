@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/routes/app_routes.dart';
 import 'package:flutter_application_1/screens/about.dart';
 import 'package:flutter_application_1/screens/details.dart';
 import 'package:flutter_application_1/screens/myposts.dart';
-import 'package:flutter_application_1/screens/otp_screen.dart';
+import 'package:flutter_application_1/screens/phone_screen.dart';
 import 'package:flutter_application_1/screens/privacypolicy.dart';
 import 'package:flutter_application_1/screens/styles.dart';
 import 'package:flutter_application_1/screens/terms.dart';
@@ -140,7 +139,10 @@ class ProfileScreen extends StatelessWidget {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.phone);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyPhone()),
+                    );
                   },
                   child: Text('Log-Out'),
                   style: ElevatedButton.styleFrom(

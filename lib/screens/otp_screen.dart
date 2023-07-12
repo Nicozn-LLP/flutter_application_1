@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/phone_screen.dart';
+import 'package:flutter_application_1/screens/register_screen.dart';
 import 'package:flutter_application_1/screens/styles.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
-
-import '../routes/app_routes.dart';
 
 class MyOtp extends StatefulWidget {
   const MyOtp({Key? key}) : super(key: key);
@@ -96,7 +96,10 @@ class _MyOtpState extends State<MyOtp> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.register);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RegisterPage()),
+                    );
                   },
                   child: Text('Verify phone number'),
                   style: ElevatedButton.styleFrom(
@@ -109,7 +112,10 @@ class _MyOtpState extends State<MyOtp> {
                 children: [
                   TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, AppRoutes.phone);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MyPhone()),
+                        );
                       },
                       child: Text(
                         'Edit Phone Number ?',

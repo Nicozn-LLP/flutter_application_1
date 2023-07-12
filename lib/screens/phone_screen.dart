@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/routes/app_routes.dart';
+import 'package:flutter_application_1/screens/otp_screen.dart';
 import 'package:flutter_application_1/screens/styles.dart';
 import 'package:lottie/lottie.dart';
 
@@ -11,24 +11,28 @@ class MyPhone extends StatefulWidget {
 }
 
 class _MyPhoneState extends State<MyPhone> {
-
-  TextEditingController countrycode= TextEditingController();
+  TextEditingController countrycode = TextEditingController();
 
   @override
   void initState() {
-    countrycode.text="+91";
+    countrycode.text = "+91";
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(onPressed: () {
-          Navigator.pop(context);
-        },
-            icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black,)),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.black,
+            )),
       ),
       body: Container(
         margin: EdgeInsets.only(left: 25, right: 25),
@@ -89,7 +93,8 @@ class _MyPhoneState extends State<MyPhone> {
                     ),
                     Expanded(
                       child: TextField(
-                        decoration: InputDecoration(border: InputBorder.none, hintText: "Phone"),
+                        decoration: InputDecoration(
+                            border: InputBorder.none, hintText: "Phone"),
                       ),
                     ),
                   ],
@@ -103,7 +108,10 @@ class _MyPhoneState extends State<MyPhone> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.otp);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyOtp()),
+                    );
                   },
                   child: Text('Send the code'),
                   style: ElevatedButton.styleFrom(

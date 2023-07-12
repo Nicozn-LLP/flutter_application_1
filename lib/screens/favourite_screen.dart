@@ -43,6 +43,7 @@ class FavouriteScreen extends StatelessWidget {
 
     return Scaffold(
       body: Container(
+          child: Center(
         child: Column(
           children: [
             Padding(
@@ -66,7 +67,7 @@ class FavouriteScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      )),
     );
   }
 }
