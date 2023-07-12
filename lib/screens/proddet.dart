@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/styles.dart';
 
 import 'contact.dart';
 
@@ -9,29 +8,24 @@ class Proddet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.black,
+            )),
+      ),
       body: Container(
-        color: Colors.white,
         child: Stack(
           children: [
             Positioned(
-              top: 50,
-              left: 2,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(primaryColor),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  )),
-                ),
-                child: const Icon(Icons.arrow_back),
-              ),
-            ),
-            Positioned(
               left: 20,
-              top: 118,
+              top: 10,
               child: Text(
                 'Maruti Suzuki',
                 style: TextStyle(
@@ -45,7 +39,7 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 20,
-              top: 162,
+              top: 50,
               child: Text(
                 'Ignis',
                 style: TextStyle(
@@ -59,7 +53,7 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 20,
-              top: 210,
+              top: 100,
               child: Container(
                 width: 320,
                 height: 200,
@@ -75,7 +69,7 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 20,
-              top: 450,
+              top: 340,
               child: Text(
                 'Car Features',
                 style: TextStyle(
@@ -89,7 +83,7 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 44,
-              top: 493,
+              top: 393,
               child: Text(
                 '5 Passengers',
                 style: TextStyle(
@@ -103,7 +97,7 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 44,
-              top: 527,
+              top: 427,
               child: Text(
                 'Bluetooth',
                 style: TextStyle(
@@ -117,7 +111,7 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 217,
-              top: 493,
+              top: 393,
               child: Text(
                 '4 Doors',
                 style: TextStyle(
@@ -131,7 +125,7 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 217,
-              top: 525,
+              top: 425,
               child: Text(
                 'GPS',
                 style: TextStyle(
@@ -145,7 +139,7 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 44,
-              top: 559,
+              top: 459,
               child: Text(
                 'Manual',
                 style: TextStyle(
@@ -159,7 +153,7 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 0,
-              top: 625,
+              top: 525,
               child: Container(
                 width: 360,
                 height: 100,
@@ -168,7 +162,7 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 20,
-              top: 650,
+              top: 550,
               child: Container(
                 width: 99,
                 height: 47,
@@ -202,7 +196,7 @@ class Proddet extends StatelessWidget {
             ),
             Positioned(
               left: 200,
-              top: 650,
+              top: 550,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
