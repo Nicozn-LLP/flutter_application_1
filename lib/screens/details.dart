@@ -87,7 +87,7 @@ class _DetailsState extends State<Details> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
-                  keyboardType: TextInputType.phone,
+                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.symmetric(horizontal: 10),
@@ -114,7 +114,7 @@ class _DetailsState extends State<Details> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
-                  keyboardType: TextInputType.phone,
+                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.symmetric(horizontal: 10),
@@ -141,7 +141,7 @@ class _DetailsState extends State<Details> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
-                  keyboardType: TextInputType.phone,
+                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.symmetric(horizontal: 10),

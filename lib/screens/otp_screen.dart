@@ -43,10 +43,14 @@ class _MyOtpState extends State<MyOtp> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(onPressed: () {
-          Navigator.pop(context);
-        },
-            icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black,)),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.black,
+            )),
       ),
       body: Container(
         margin: EdgeInsets.only(left: 25, right: 25),
@@ -96,8 +100,7 @@ class _MyOtpState extends State<MyOtp> {
                   },
                   child: Text('Verify phone number'),
                   style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: primaryColor,
+                      primary: primaryColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(11))),
                 ),
@@ -105,7 +108,9 @@ class _MyOtpState extends State<MyOtp> {
               Row(
                 children: [
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, AppRoutes.phone);
+                      },
                       child: Text(
                         'Edit Phone Number ?',
                         style: TextStyle(color: Colors.black),

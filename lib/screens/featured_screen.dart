@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/slider.dart';
 
 import '../itrm_details.dart';
-import 'contact.dart';
 
 class FeaturedScreen extends StatelessWidget {
   const FeaturedScreen({Key? key}) : super(key: key);
