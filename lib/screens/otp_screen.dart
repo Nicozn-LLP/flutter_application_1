@@ -13,15 +13,33 @@ class MyOtp extends StatefulWidget {
 }
 
 class _MyOtpState extends State<MyOtp> {
+  TextEditingController otpController = TextEditingController();
+  bool isValidOTP = false;
+
+  @override
+  void dispose() {
+    otpController.dispose();
+    super.dispose();
+  }
+
+  void validateOTP(String otp) {
+    final otpRegex = r'^\d{6}$';
+    final RegExp regex = RegExp(otpRegex);
+    setState(() {
+      isValidOTP = regex.hasMatch(otp);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
       textStyle: TextStyle(
-          fontSize: 20,
-          color: Color.fromRGBO(30, 60, 87, 1),
-          fontWeight: FontWeight.w600),
+        fontSize: 20,
+        color: Color.fromRGBO(30, 60, 87, 1),
+        fontWeight: FontWeight.w600,
+      ),
       decoration: BoxDecoration(
         border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
         borderRadius: BorderRadius.circular(20),
@@ -44,13 +62,14 @@ class _MyOtpState extends State<MyOtp> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Colors.black,
-            )),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Colors.black,
+          ),
+        ),
       ),
       body: Container(
         margin: EdgeInsets.only(left: 25, right: 25),
@@ -87,6 +106,9 @@ class _MyOtpState extends State<MyOtp> {
               Pinput(
                 length: 6,
                 showCursor: true,
+                onChanged: (value) {
+                  validateOTP(value);
+                },
               ),
               SizedBox(
                 height: 20,
@@ -95,47 +117,47 @@ class _MyOtpState extends State<MyOtp> {
                 height: 45,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => RegisterPage()),
-                    );
-                  },
+                  onPressed: isValidOTP
+                      ? () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => RegisterPage(),
+                            ),
+                          );
+                        }
+                      : null, // Disable the button if OTP is invalid
                   child: Text('Verify phone number'),
                   style: ElevatedButton.styleFrom(
-                      primary: primaryColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
+                    primary: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
                 ),
               ),
               Row(
                 children: [
                   TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => MyPhone()),
-                        );
-                      },
-                      child: Text(
-                        'Edit Phone Number ?',
-                        style: TextStyle(color: Colors.black),
-                      ))
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyPhone(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Edit Phone Number?',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),
       ),
     );
   }
-}
-
-bool isValidEmail(String value) {
-  // Define your email validation logic here
-  // Return true if the email address is valid, false otherwise
-  final emailRegex =
-      r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$';
-  final RegExp regex = RegExp(emailRegex);
-  return regex.hasMatch(value);
 }

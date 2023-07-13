@@ -12,11 +12,26 @@ class MyPhone extends StatefulWidget {
 
 class _MyPhoneState extends State<MyPhone> {
   TextEditingController countrycode = TextEditingController();
+  TextEditingController phoneNumber = TextEditingController();
+  bool isValidPhoneNumber = false;
 
   @override
   void initState() {
     countrycode.text = "+91";
     super.initState();
+  }
+
+  void validatePhoneNumber() {
+    final RegExp phoneRegex = RegExp(r'^\d{10}$');
+    setState(() {
+      isValidPhoneNumber = phoneRegex.hasMatch(phoneNumber.text);
+    });
+  }
+
+  void sendOTP() {
+    // Simulate OTP sending
+    // Replace this with your actual OTP sending logic or API call
+    print('OTP sent to: ${countrycode.text + phoneNumber.text}');
   }
 
   @override
@@ -26,25 +41,25 @@ class _MyPhoneState extends State<MyPhone> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Colors.black,
-            )),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Colors.black,
+          ),
+        ),
       ),
       body: Container(
         margin: EdgeInsets.only(left: 25, right: 25),
-        alignment: Alignment.center,
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Lottie.network(
                 'https://assets7.lottiefiles.com/packages/lf20_zl2c0cuv.json',
-                width: 150,
-                height: 150,
+                width: 200,
+                height: 200,
               ),
               SizedBox(
                 height: 25,
@@ -93,8 +108,14 @@ class _MyPhoneState extends State<MyPhone> {
                     ),
                     Expanded(
                       child: TextField(
+                        controller: phoneNumber,
                         decoration: InputDecoration(
-                            border: InputBorder.none, hintText: "Phone"),
+                          border: InputBorder.none,
+                          hintText: "Phone",
+                        ),
+                        onChanged: (value) {
+                          validatePhoneNumber();
+                        },
                       ),
                     ),
                   ],
@@ -107,20 +128,25 @@ class _MyPhoneState extends State<MyPhone> {
                 height: 45,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MyOtp()),
-                    );
-                  },
+                  onPressed: isValidPhoneNumber
+                      ? () {
+                          sendOTP();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MyOtp()),
+                          );
+                        }
+                      : null, // Disable the button if phone number is invalid
                   child: Text('Send the code'),
                   style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: primaryColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
+                    foregroundColor: Colors.white,
+                    backgroundColor: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
