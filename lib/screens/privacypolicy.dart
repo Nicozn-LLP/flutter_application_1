@@ -32,7 +32,7 @@ class PrivacyPolicyPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15.0),
                 )),
               ),
-              child: const Icon(Icons.arrow_back),
+              child: const Icon(Icons.arrow_back_ios_new_rounded),
             ),
           ),
           Center(

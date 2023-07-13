@@ -15,7 +15,7 @@ class AboutPage extends StatelessWidget {
             },
             icon: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: Colors.black,
+              color: Colors.white,
             )),
       ),
       body: Stack(
