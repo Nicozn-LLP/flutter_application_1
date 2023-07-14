@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/otp_screen.dart';
 import 'package:flutter_application_1/screens/styles.dart';
@@ -6,12 +7,15 @@ import 'package:lottie/lottie.dart';
 class MyPhone extends StatefulWidget {
   const MyPhone({Key? key}) : super(key: key);
 
+  static String verify="";
+
   @override
   State<MyPhone> createState() => _MyPhoneState();
 }
 
 class _MyPhoneState extends State<MyPhone> {
   TextEditingController countrycode = TextEditingController();
+  var phone="";
 
   @override
   void initState() {
@@ -36,15 +40,14 @@ class _MyPhoneState extends State<MyPhone> {
       ),
       body: Container(
         margin: EdgeInsets.only(left: 25, right: 25),
-        alignment: Alignment.center,
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Lottie.network(
                 'https://assets7.lottiefiles.com/packages/lf20_zl2c0cuv.json',
-                width: 150,
-                height: 150,
+                width: 300,
+                height: 300,
               ),
               SizedBox(
                 height: 25,
@@ -93,6 +96,10 @@ class _MyPhoneState extends State<MyPhone> {
                     ),
                     Expanded(
                       child: TextField(
+                        keyboardType: TextInputType.phone,
+                        onChanged: (value){
+                          phone = value;
+                        },
                         decoration: InputDecoration(
                             border: InputBorder.none, hintText: "Phone"),
                       ),
@@ -107,10 +114,19 @@ class _MyPhoneState extends State<MyPhone> {
                 height: 45,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MyOtp()),
+                  onPressed: () async{
+                    await FirebaseAuth.instance.verifyPhoneNumber(
+                      phoneNumber: '${countrycode.text+phone}',
+                      verificationCompleted: (PhoneAuthCredential credential) {},
+                      verificationFailed: (FirebaseAuthException e) {},
+                      codeSent: (String verificationId, int? resendToken) {
+                        MyPhone.verify=verificationId;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MyOtp()),
+                        );
+                      },
+                      codeAutoRetrievalTimeout: (String verificationId) {},
                     );
                   },
                   child: Text('Send the code'),
