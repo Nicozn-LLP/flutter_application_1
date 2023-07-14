@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/rating.dart';
-
-import 'contact.dart';
+import 'package:flutter_application_1/screens/styles.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Proddet extends StatefulWidget {
-  const Proddet({Key? key}) : super(key: key);
+  const Proddet({super.key});
 
   @override
   State<Proddet> createState() => _ProddetState();
+}
+
+void _launchPhoneDialer() async {
+  const phoneNumber = '1234567890';
+  const url = 'tel:$phoneNumber';
+
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
 }
 
 class _ProddetState extends State<Proddet> {
@@ -211,37 +222,16 @@ class _ProddetState extends State<Proddet> {
                   left: 250,
                   top: 550,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Contact(
-                            phoneNumber: '8097147818',
-                          ),
-                        ),
-                      ); // Handle button click event
-                    },
+                    onPressed: _launchPhoneDialer,
                     style: ElevatedButton.styleFrom(
-                      primary: Color(0xFF005851),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
+                      primary: primaryColor, // Set the button color to black
                     ),
-                    child: Container(
-                      width: 50,
-                      height: 20,
-                      child: Center(
-                        child: Text(
-                          'Call Now',
-                          style: TextStyle(
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12,
-                            letterSpacing: 0.02,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+                    child: const Text(
+                      'Call Now',
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
