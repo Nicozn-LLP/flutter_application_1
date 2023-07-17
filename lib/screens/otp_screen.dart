@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/phone_screen.dart';
 import 'package:flutter_application_1/screens/register_screen.dart';
@@ -13,6 +14,8 @@ class MyOtp extends StatefulWidget {
 }
 
 class _MyOtpState extends State<MyOtp> {
+
+  final FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     final defaultPinTheme = PinTheme(
@@ -38,6 +41,8 @@ class _MyOtpState extends State<MyOtp> {
         color: Color.fromRGBO(234, 239, 243, 1),
       ),
     );
+
+    var code="";
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -87,6 +92,9 @@ class _MyOtpState extends State<MyOtp> {
               Pinput(
                 length: 6,
                 showCursor: true,
+                onChanged: (value){
+                  code=value;
+                },
               ),
               SizedBox(
                 height: 20,
@@ -95,11 +103,20 @@ class _MyOtpState extends State<MyOtp> {
                 height: 45,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => RegisterPage()),
-                    );
+                  onPressed: () async{
+                    try{
+                      PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: MyPhone.verify, smsCode: code);
+
+                      // Sign the user in (or link) with the credential
+                      await auth.signInWithCredential(credential);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RegisterPage()),
+                      );
+                    }
+                    catch(e){
+                      print("Wrong OTP");
+                    }
                   },
                   child: Text('Verify phone number'),
                   style: ElevatedButton.styleFrom(
