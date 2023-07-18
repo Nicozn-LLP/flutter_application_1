@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/Register_screen.dart';
 import 'package:flutter_application_1/screens/phone_screen.dart';
-import 'package:flutter_application_1/screens/register_screen.dart';
 import 'package:flutter_application_1/screens/styles.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
@@ -14,8 +14,9 @@ class MyOtp extends StatefulWidget {
 }
 
 class _MyOtpState extends State<MyOtp> {
-
   final FirebaseAuth auth = FirebaseAuth.instance;
+  String code = "";
+
   @override
   Widget build(BuildContext context) {
     final defaultPinTheme = PinTheme(
@@ -42,7 +43,6 @@ class _MyOtpState extends State<MyOtp> {
       ),
     );
 
-    var code="";
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -92,8 +92,10 @@ class _MyOtpState extends State<MyOtp> {
               Pinput(
                 length: 6,
                 showCursor: true,
-                onChanged: (value){
-                  code=value;
+                onChanged: (value) {
+                  setState(() {
+                    code = value;
+                  });
                 },
               ),
               SizedBox(
@@ -103,26 +105,27 @@ class _MyOtpState extends State<MyOtp> {
                 height: 45,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () async{
-                    try{
-                      PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: MyPhone.verify, smsCode: code);
+                  onPressed: code.length == 6
+                      ? () async {
+                    try {
+                      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+                          verificationId: MyPhone.verify, smsCode: code);
 
                       // Sign the user in (or link) with the credential
                       await auth.signInWithCredential(credential);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => RegisterPage()),
+                        MaterialPageRoute(builder: (context) => MyRegister()),
                       );
-                    }
-                    catch(e){
+                    } catch (e) {
                       print("Wrong OTP");
                     }
-                  },
+                  }
+                      : null, // Disable button if the OTP is not 6 digits
                   child: Text('Verify phone number'),
                   style: ElevatedButton.styleFrom(
                       primary: primaryColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                 ),
               ),
               Row(
@@ -135,7 +138,7 @@ class _MyOtpState extends State<MyOtp> {
                         );
                       },
                       child: Text(
-                        'Edit Phone Number ?',
+                        'Edit Phone Number?',
                         style: TextStyle(color: Colors.black),
                       ))
                 ],
@@ -146,13 +149,4 @@ class _MyOtpState extends State<MyOtp> {
       ),
     );
   }
-}
-
-bool isValidEmail(String value) {
-  // Define your email validation logic here
-  // Return true if the email address is valid, false otherwise
-  final emailRegex =
-      r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$';
-  final RegExp regex = RegExp(emailRegex);
-  return regex.hasMatch(value);
 }

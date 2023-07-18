@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/itrm_details.dart';
 
-import '../itrm_details.dart';
 
 class VehiclesScreen extends StatelessWidget {
   const VehiclesScreen({Key? key}) : super(key: key);
