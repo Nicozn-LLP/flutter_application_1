@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/select_category.dart';
+import 'package:renttt/screens/select_category.dart';
 
 class RentScreen extends StatelessWidget {
   @override

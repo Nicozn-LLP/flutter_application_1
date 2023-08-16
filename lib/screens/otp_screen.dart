@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/Register_screen.dart';
-import 'package:flutter_application_1/screens/phone_screen.dart';
-import 'package:flutter_application_1/screens/styles.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
+import 'package:renttt/screens/Register_screen.dart';
+import 'package:renttt/screens/phone_screen.dart';
+import 'package:renttt/screens/styles.dart';
 
 class MyOtp extends StatefulWidget {
   const MyOtp({Key? key}) : super(key: key);
@@ -19,6 +19,7 @@ class _MyOtpState extends State<MyOtp> {
 
   @override
   Widget build(BuildContext context) {
+    auth.currentUser!.uid;
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
@@ -107,25 +108,29 @@ class _MyOtpState extends State<MyOtp> {
                 child: ElevatedButton(
                   onPressed: code.length == 6
                       ? () async {
-                    try {
-                      PhoneAuthCredential credential = PhoneAuthProvider.credential(
-                          verificationId: MyPhone.verify, smsCode: code);
+                          try {
+                            PhoneAuthCredential credential =
+                                PhoneAuthProvider.credential(
+                                    verificationId: MyPhone.verify,
+                                    smsCode: code);
 
-                      // Sign the user in (or link) with the credential
-                      await auth.signInWithCredential(credential);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MyRegister()),
-                      );
-                    } catch (e) {
-                      print("Wrong OTP");
-                    }
-                  }
+                            // Sign the user in (or link) with the credential
+                            await auth.signInWithCredential(credential);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MyRegister()),
+                            );
+                          } catch (e) {
+                            print("Wrong OTP");
+                          }
+                        }
                       : null, // Disable button if the OTP is not 6 digits
                   child: Text('Verify phone number'),
                   style: ElevatedButton.styleFrom(
                       primary: primaryColor,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
                 ),
               ),
               Row(

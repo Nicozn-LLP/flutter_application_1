@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/styles.dart';
+import 'package:renttt/screens/styles.dart';
 
 import 'add_post.dart';
 
@@ -10,7 +10,7 @@ class SelectCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -52,7 +52,8 @@ class SelectCategory extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Addpost()),
+                        MaterialPageRoute(
+                            builder: (context) => Addpost(category: 'Cars')),
                       );
                     },
                   ),
@@ -64,7 +65,8 @@ class SelectCategory extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Addpost()),
+                        MaterialPageRoute(
+                            builder: (context) => Addpost(category: 'Bike')),
                       );
                     },
                   ),
@@ -76,7 +78,9 @@ class SelectCategory extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Addpost()),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                Addpost(category: 'Apparels')),
                       );
                     },
                   ),
@@ -88,7 +92,9 @@ class SelectCategory extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Addpost()),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                Addpost(category: 'Accessories')),
                       );
                     },
                   ),
@@ -100,7 +106,9 @@ class SelectCategory extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Addpost()),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                Addpost(category: 'Services')),
                       );
                     },
                   ),
@@ -112,11 +120,11 @@ class SelectCategory extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Addpost()),
+                        MaterialPageRoute(
+                            builder: (context) => Addpost(category: 'Events')),
                       );
                     },
                   ),
-
                   // Rest of the CategoryBox widgets
                 ],
               ),
@@ -162,8 +170,8 @@ class CategoryBox extends StatelessWidget {
           children: [
             Image.asset(
               image,
-              width: 110,
-              height: 110,
+              width: 135,
+              height: 135,
               fit: BoxFit.cover,
             ),
             Text(

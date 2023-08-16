@@ -1,48 +1,92 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/slider.dart';
-
-import '../itrm_details.dart';
+import 'package:renttt/screens/slider.dart';
+import 'package:renttt/utils.dart/item_box.dart';
 
 class FeaturedScreen extends StatelessWidget {
   const FeaturedScreen({Key? key}) : super(key: key);
 
+  // Step 1: Define a function to handle bookmark changes
+  void _onBookmarkChanged(bool isBookmarked, String documentId) {
+    // Update the bookmark status in Firestore for the given documentId
+    FirebaseFirestore.instance.collection('products').doc(documentId).update({
+      'isBookmarked': isBookmarked,
+    }).then((value) {
+      print('Bookmark state updated successfully!');
+    }).catchError((error) {
+      print('Failed to update bookmark state: $error');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<Widget> items = [];
-    items.add(ItemContainer(
-      imageUrl1:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      imageUrl2:
-          'https://images.pexels.com/photos/339379/pexels-photo-339379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      name1: '',
-      name2: '',
-    ));
-    items.add(ItemContainer(
-      imageUrl1:
-          'https://images.pexels.com/photos/339379/pexels-photo-339379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      imageUrl2:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      name1: '',
-      name2: '',
-    ));
-    items.add(ItemContainer(
-      imageUrl1:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLxSkwhfRx5n1mZP1EgH04eqfpBgFqjy4B-w&usqp=CAU',
-      imageUrl2:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu550bxZtiD_tkCLgKT0Lib_Xr80A5a0U-zw&usqp=CAU',
-      name1: '',
-      name2: '',
-    ));
-
-    return SingleChildScrollView(
+    return Scaffold(
+      body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Center(
-          child: Column(
-            children: [
-              Slide(), // Add the Slide widget here
-              ...items,
-            ],
-          ),
-        ));
+        child: Column(
+          children: [
+            Slide(),
+            SizedBox(height: 15.0),
+            StreamBuilder<QuerySnapshot>(
+              stream:
+                  FirebaseFirestore.instance.collection('products').snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  // Handle error
+                  return Text('Error: ${snapshot.error}');
+                }
+
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  // Display a loading indicator while waiting for data
+                  return CircularProgressIndicator();
+                }
+
+                final documents = snapshot.data!.docs;
+
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10.0,
+                      crossAxisSpacing: 10.0,
+                      childAspectRatio: 0.95,
+                    ),
+                    itemCount: documents.length,
+                    itemBuilder: (context, index) {
+                      final document = documents[index];
+                      final data = document.data() as Map<String, dynamic>;
+
+                      final brand = data['brand'];
+                      final model = data['model'];
+                      final imageUrl = data['imageUrl'];
+                      final location = data['location'];
+                      final price = data['price'];
+                      final documentId = document.id;
+
+                      return ItemBox(
+                        brand: brand,
+                        model: model,
+                        imageUrl: imageUrl,
+                        location: location,
+                        productPrice: price,
+                        documentId: documentId,
+                        isBookmarked: data['isBookmarked'] ?? false,
+                        onBookmarkChanged: (isBookmarked, sss) {
+                          // Handle bookmark changes here (e.g., update Firestore)
+                          _onBookmarkChanged(isBookmarked, documentId);
+                        },
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

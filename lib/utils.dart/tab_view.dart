@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/utils.dart/searching_bar.dart';
+import 'package:renttt/utils.dart/searching_bar.dart';
 
 import '../screens/accessories_screen.dart';
 import '../screens/fashion_screen.dart';
@@ -52,17 +52,23 @@ class _TabViewState extends State<TabView> with TickerProviderStateMixin {
           child: Text(
         'Vehicles',
         style: TextStyle(color: Colors.black),
-      )): VehiclesScreen(),
+      )): VehiclesScreen(
+        category: '',
+      ),
       Tab(
           child: Text(
         'Fashion',
         style: TextStyle(color: Colors.black),
-      )): FashionScreen(),
+      )): FashionScreen(
+        category: '',
+      ),
       Tab(
           child: Text(
         'Accessories',
         style: TextStyle(color: Colors.black),
-      )): AccessoriesScreen()
+      )): AccessoriesScreen(
+        category: '',
+      )
     };
 
     List<TabClass> tabClass = [];

@@ -1,43 +1,66 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-import '../itrm_details.dart';
+import 'package:renttt/utils.dart/item_box.dart';
 
 class AccessoriesScreen extends StatelessWidget {
-  const AccessoriesScreen({Key? key}) : super(key: key);
+  final String category;
+
+  const AccessoriesScreen({Key? key, required this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> items = [];
-    items.add(ItemContainer(
-      imageUrl1:
-          'https://images.pexels.com/photos/339379/pexels-photo-339379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      imageUrl2:
-          'https://images.pexels.com/photos/339379/pexels-photo-339379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      name1: '',
-      name2: '',
-    ));
-    items.add(ItemContainer(
-      imageUrl1:
-          'https://images.pexels.com/photos/339379/pexels-photo-339379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      imageUrl2:
-          'https://images.pexels.com/photos/339379/pexels-photo-339379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      name1: '',
-      name2: '',
-    ));
-    items.add(ItemContainer(
-      imageUrl1:
-          'https://images.pexels.com/photos/339379/pexels-photo-339379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      imageUrl2:
-          'https://images.pexels.com/photos/339379/pexels-photo-339379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      name1: '',
-      name2: '',
-    ));
+    return Scaffold(
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection('products')
+            .where('category', whereIn: [
+          'Accessories, Services'
+        ]) // Filter by type (Bike or Car)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          }
 
-    return SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Center(
-            child: Column(
-          children: items,
-        )));
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          }
+
+          final documents = snapshot.data!.docs;
+
+          return ListView.builder(
+            itemCount: documents.length,
+            itemBuilder: (context, index) {
+              final document = documents[index];
+              final data = document.data() as Map<String, dynamic>;
+
+              // Extract vehicle data
+              final brand = data['brand'];
+              final model = data['model'];
+              final imageUrl = data['imageUrl'];
+              final location = data['location'];
+              final price = data['price'];
+              final documentId = document.id;
+
+              return ItemBox(
+                brand: brand,
+                model: model,
+                imageUrl: imageUrl,
+                location: location,
+                productPrice: price,
+                documentId: documentId,
+                isBookmarked: data['isBookmarked'] ?? false,
+                onBookmarkChanged: (isBookmarked, sss) {
+                  // Handle bookmark changes here (e.g., update Firestore)
+                  onBookmarkChanged(isBookmarked, documentId);
+                },
+              );
+            },
+          );
+        },
+      ),
+    );
   }
+
+  void onBookmarkChanged(bool isBookmarked, String documentId) {}
 }

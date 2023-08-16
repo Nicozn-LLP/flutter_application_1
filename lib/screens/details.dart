@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/styles.dart';
-import 'package:flutter_application_1/screens/utilss.dart';
+import 'package:renttt/screens/styles.dart';
+import 'package:renttt/screens/utilss.dart';
 
 class Details extends StatefulWidget {
   @override

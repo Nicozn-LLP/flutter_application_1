@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/rating.dart';
-import 'package:flutter_application_1/screens/styles.dart';
+import 'package:renttt/screens/rating.dart';
+import 'package:renttt/screens/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Proddet extends StatefulWidget {

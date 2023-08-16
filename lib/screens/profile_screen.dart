@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/about.dart';
-import 'package:flutter_application_1/screens/details.dart';
-import 'package:flutter_application_1/screens/myposts.dart';
-import 'package:flutter_application_1/screens/phone_screen.dart';
-import 'package:flutter_application_1/screens/privacypolicy.dart';
-import 'package:flutter_application_1/screens/styles.dart';
-import 'package:flutter_application_1/screens/terms.dart';
+import 'package:renttt/screens/about.dart';
+import 'package:renttt/screens/details.dart';
+import 'package:renttt/screens/myposts.dart';
+import 'package:renttt/screens/phone_screen.dart';
+import 'package:renttt/screens/privacypolicy.dart';
+import 'package:renttt/screens/styles.dart';
+import 'package:renttt/screens/terms.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/styles.dart';
+import 'package:renttt/screens/styles.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
   @override

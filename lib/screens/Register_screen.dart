@@ -1,16 +1,52 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/bottom_bar.dart';
-import 'package:flutter_application_1/screens/styles.dart';
-
+import 'package:renttt/screens/bottom_bar.dart';
+import 'package:renttt/screens/styles.dart';
 
 class MyRegister extends StatefulWidget {
-  const MyRegister({super.key});
+  const MyRegister({Key? key}) : super(key: key);
 
   @override
   State<MyRegister> createState() => _MyRegisterState();
 }
 
 class _MyRegisterState extends State<MyRegister> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _dobController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+
+  // Function to save the user's data to Firestore and navigate to the FeaturedScreen
+  Future<void> saveUserDataAndNavigateToFeaturedScreen() async {
+    try {
+      // Get the current user ID from FirebaseAuth
+      String userId = _auth.currentUser?.uid ?? "";
+
+      // Create a document reference for the user with the userID
+      DocumentReference userRef =
+          FirebaseFirestore.instance.collection('Users').doc(userId);
+
+      // Save the user data in the user document
+      await userRef.set({
+        'first_name': _firstNameController.text,
+        'last_name': _lastNameController.text,
+        'date_of_birth': _dobController.text,
+        'email': _emailController.text,
+        // Add other user information as needed
+      });
+
+      // Data saved successfully, navigate to the FeaturedScreen page
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Bottombar()),
+      );
+    } catch (error) {
+      print('Error saving user data: $error');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,6 +86,7 @@ class _MyRegisterState extends State<MyRegister> {
                 child: Column(
                   children: [
                     TextField(
+                      controller: _firstNameController,
                       decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -66,6 +103,7 @@ class _MyRegisterState extends State<MyRegister> {
                       height: 30,
                     ),
                     TextField(
+                      controller: _lastNameController,
                       decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -82,7 +120,7 @@ class _MyRegisterState extends State<MyRegister> {
                       height: 30,
                     ),
                     TextField(
-                      obscureText: true,
+                      controller: _dobController,
                       decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -99,7 +137,7 @@ class _MyRegisterState extends State<MyRegister> {
                       height: 30,
                     ),
                     TextField(
-                      obscureText: true,
+                      controller: _emailController,
                       decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -129,10 +167,8 @@ class _MyRegisterState extends State<MyRegister> {
                           child: IconButton(
                             color: Colors.white,
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Bottombar()),
-                              );
+                              // Save the user data to Firestore and navigate to the FeaturedScreen
+                              saveUserDataAndNavigateToFeaturedScreen();
                             },
                             icon: Icon(Icons.arrow_forward),
                           ),

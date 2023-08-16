@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/Register_screen.dart';
-import 'package:flutter_application_1/screens/otp_screen.dart';
-import 'package:flutter_application_1/screens/phone_screen.dart';
-import 'package:flutter_application_1/screens/welcome_screen.dart';
-
+import 'package:renttt/screens/Register_screen.dart';
+import 'package:renttt/screens/otp_screen.dart';
+import 'package:renttt/screens/phone_screen.dart';
+import 'package:renttt/screens/welcome_screen.dart';
 
 class AppRoutes {
   static const String welcome = '/welcome';
@@ -26,6 +25,6 @@ class AppRoutes {
     }
   }
 
-
-  static _getMaterialRoute(Widget page) => MaterialPageRoute(builder: (BuildContext context) => page);
+  static _getMaterialRoute(Widget page) =>
+      MaterialPageRoute(builder: (BuildContext context) => page);
 }

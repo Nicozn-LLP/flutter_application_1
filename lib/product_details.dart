@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/slider.dart';
-import 'package:flutter_application_1/screens/styles.dart';
+import 'package:renttt/screens/slider.dart';
+import 'package:renttt/screens/styles.dart';
 
 class Productdetails extends StatelessWidget {
   final String imageUrl1;

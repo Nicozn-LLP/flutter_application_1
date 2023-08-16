@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/proddet.dart';
+import 'package:renttt/screens/proddet.dart';
 
 class ItemContainer extends StatelessWidget {
   final String imageUrl1;

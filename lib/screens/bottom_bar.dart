@@ -1,8 +1,8 @@
 import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/profile_screen.dart';
-import 'package:flutter_application_1/screens/rent_screen.dart';
+import 'package:renttt/screens/profile_screen.dart';
+import 'package:renttt/screens/rent_screen.dart';
 
 import 'favourite_screen.dart';
 import 'home_screen.dart';
