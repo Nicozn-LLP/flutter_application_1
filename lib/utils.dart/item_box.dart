@@ -66,7 +66,7 @@ class _ItemBoxState extends State<ItemBox> {
             style: TextStyle(
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
-              fontSize: 15,
+              fontSize: 12,
               color: const Color(0xFF3F3D3C),
             ),
           ),
@@ -81,7 +81,7 @@ class _ItemBoxState extends State<ItemBox> {
             child: Image.network(
               widget.imageUrl,
               fit: BoxFit.cover,
-              height: 80.0,
+              height: 60.0,
               width: double.infinity, // Set the fit property to BoxFit.fitWidth
             ),
           ),
@@ -120,16 +120,12 @@ class _ItemBoxState extends State<ItemBox> {
                   )
                 ],
               ),
-              SizedBox(
-                width: 5.0,
-              ),
+              Expanded(child: SizedBox.shrink()),
               IconButton(
-                  onPressed: () {
-                    print("hi");
-                  },
+                  onPressed: () {},
                   icon: Icon(
                     isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-                    size: 40,
+                    size: 30,
                     color: const Color(0xFF3F3D3C),
                   ))
             ],

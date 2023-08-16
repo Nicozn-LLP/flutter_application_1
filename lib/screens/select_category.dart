@@ -10,7 +10,7 @@ class SelectCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+        padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -170,8 +170,8 @@ class CategoryBox extends StatelessWidget {
           children: [
             Image.asset(
               image,
-              width: 135,
-              height: 135,
+              width: 100,
+              height: 100,
               fit: BoxFit.cover,
             ),
             Text(
@@ -188,22 +188,6 @@ class CategoryBox extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class Category extends StatelessWidget {
-  const Category({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Category'),
-      ),
-      body: const Center(
-        child: Text('Category Screen'),
       ),
     );
   }

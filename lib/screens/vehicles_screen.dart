@@ -27,7 +27,15 @@ class VehiclesScreen extends StatelessWidget {
 
           final documents = snapshot.data!.docs;
 
-          return ListView.builder(
+          return GridView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 10.0,
+              crossAxisSpacing: 10.0,
+              childAspectRatio: 0.95,
+            ),
             itemCount: documents.length,
             itemBuilder: (context, index) {
               final document = documents[index];

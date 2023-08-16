@@ -26,11 +26,6 @@ class _AddpostState extends State<Addpost> {
   TextEditingController _locationController = TextEditingController();
   TextEditingController _priceController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
-  String brand = '';
-  String model = '';
-  String feature = '';
-  String price = '';
-  String location = '';
   File? _image;
   String imageUrl = '';
   bool _isImageLoading = false;
@@ -112,6 +107,14 @@ class _AddpostState extends State<Addpost> {
       }
     }
   }
+
+  // @override
+  // void initState() {
+  //   _brandController.addListener(() {
+  //     print(_brandController.text);
+  //   });
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -198,11 +201,6 @@ class _AddpostState extends State<Addpost> {
                             padding: const EdgeInsets.symmetric(horizontal: 12),
                             child: TextFormField(
                               controller: _brandController,
-                              onChanged: (value) {
-                                setState(() {
-                                  brand = value;
-                                });
-                              },
                               decoration: const InputDecoration(
                                 border: InputBorder.none,
                                 hintText: 'Enter the brand',
@@ -251,11 +249,6 @@ class _AddpostState extends State<Addpost> {
                             padding: const EdgeInsets.symmetric(horizontal: 12),
                             child: TextFormField(
                               controller: _modelController,
-                              onChanged: (value) {
-                                setState(() {
-                                  model = value;
-                                });
-                              },
                               decoration: const InputDecoration(
                                 border: InputBorder.none,
                                 hintText: 'Enter the Model',
@@ -312,11 +305,6 @@ class _AddpostState extends State<Addpost> {
                                   const EdgeInsets.symmetric(horizontal: 20),
                               child: TextFormField(
                                 controller: _featureController,
-                                onChanged: (value) {
-                                  setState(() {
-                                    feature = value;
-                                  });
-                                },
                                 decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   hintText: 'Enter the feature',
@@ -370,11 +358,6 @@ class _AddpostState extends State<Addpost> {
                             padding: const EdgeInsets.symmetric(horizontal: 12),
                             child: TextFormField(
                               controller: _locationController,
-                              onChanged: (value) {
-                                setState(() {
-                                  location = value;
-                                });
-                              },
                               decoration: const InputDecoration(
                                 border: InputBorder.none,
                                 hintText: 'Select the location',
@@ -423,11 +406,6 @@ class _AddpostState extends State<Addpost> {
                             padding: const EdgeInsets.symmetric(horizontal: 12),
                             child: TextFormField(
                               controller: _priceController,
-                              onChanged: (value) {
-                                setState(() {
-                                  price = value;
-                                });
-                              },
                               decoration: const InputDecoration(
                                 border: InputBorder.none,
                                 hintText: 'Enter the Price in rupees',
@@ -482,11 +460,6 @@ class _AddpostState extends State<Addpost> {
                               padding: const EdgeInsets.only(left: 20),
                               child: TextFormField(
                                 controller: _descriptionController,
-                                onChanged: (value) {
-                                  setState(() {
-                                    model = value;
-                                  });
-                                },
                                 decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   hintText: 'Description text',
@@ -553,11 +526,6 @@ class _AddpostState extends State<Addpost> {
                         onPressed: () async {
                           // Use the widget.category value here
                           print('Category: ${widget.category}');
-                          print('Brand: $brand');
-                          print('Model: $model');
-                          print('Feature: $feature');
-                          print('Location: $location');
-                          print('Price: $price');
                           print('Description: ${_descriptionController.text}');
                           print('imageurl: ${imageUrl}');
 
@@ -580,15 +548,14 @@ class _AddpostState extends State<Addpost> {
                                   .collection('products')
                                   .add({
                                 'category': widget.category,
-                                'brand': brand,
-                                'model': model,
-                                'feature': feature,
-                                'location': location,
-                                'price': price,
+                                'brand': _brandController.text,
+                                'model': _modelController.text,
+                                'feature': _featureController.text,
+                                'location': _locationController.text,
+                                'price': _priceController.text,
                                 'description': _descriptionController.text,
                                 'imageUrl': imageUrl,
                                 'userId': uid,
-                                'category': widget.category
                               });
 
                               // Data saved successfully

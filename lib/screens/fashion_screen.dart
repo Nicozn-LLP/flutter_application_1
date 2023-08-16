@@ -13,7 +13,7 @@ class FashionScreen extends StatelessWidget {
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('products').where(
                 'category',
-                whereIn: ['Apparels,Events']) // Filter by type (Bike or Car)
+                whereIn: ['Apparels', 'Events']) // Filter by type (Bike or Car)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
