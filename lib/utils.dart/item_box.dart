@@ -81,7 +81,7 @@ class _ItemBoxState extends State<ItemBox> {
             child: Image.network(
               widget.imageUrl,
               fit: BoxFit.cover,
-              height: 60.0,
+              height: 65.0,
               width: double.infinity, // Set the fit property to BoxFit.fitWidth
             ),
           ),
