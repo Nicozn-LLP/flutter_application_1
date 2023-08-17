@@ -1,58 +1,29 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../itrm_details.dart';
+import '../utils.dart/item_box.dart';
 
 class Myposts extends StatelessWidget {
   const Myposts({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> items = [];
-    items.add(ItemContainer(
-      imageUrl1:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      imageUrl2:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      name1: '',
-      name2: '',
-    ));
-    items.add(ItemContainer(
-      imageUrl1:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      imageUrl2:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      name1: '',
-      name2: '',
-    ));
-    items.add(ItemContainer(
-      imageUrl1:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      imageUrl2:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      name1: '',
-      name2: '',
-    ));
-    items.add(ItemContainer(
-      imageUrl1:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      imageUrl2:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      name1: '',
-      name2: '',
-    ));
+    final uid = FirebaseAuth.instance.currentUser!.uid;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Colors.black,
-            )),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Colors.black,
+          ),
+        ),
       ),
       body: Column(
         children: [
@@ -72,12 +43,61 @@ class Myposts extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(
+            height: 20,
+          ),
           Expanded(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                children: items,
-              ),
+            child: StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('products')
+                  .where('userId',
+                      isEqualTo: uid) // Filter by current user's ID
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                }
+                if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                }
+                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  return Text('No posts found.');
+                }
+
+                return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, // Number of columns in the grid
+                    mainAxisSpacing: 10.0, // Spacing between rows
+                    crossAxisSpacing: 10.0, // Spacing between columns
+                  ),
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    final doc = snapshot.data!.docs[index];
+                    final data = doc.data() as Map<String, dynamic>;
+
+                    // Check if the current user ID matches the product's user ID
+                    if (data['userId'] == uid) {
+                      return ItemBox(
+                        // Pass the necessary data to your ItemBox widget
+                        brand: data['brand'],
+                        model: data['model'],
+                        imageUrl: data['imageUrl'],
+                        location: data['location'],
+                        productPrice: data['price'],
+                        documentId: doc.id,
+                        isBookmarked:
+                            false, // You can set this based on your bookmark logic
+                        onBookmarkChanged: (isBookmarked, documentId) {
+                          // Handle bookmark changes here
+                        },
+                      );
+                    } else {
+                      return SizedBox
+                          .shrink(); // If the user ID doesn't match, hide the item
+                    }
+                  },
+                );
+              },
             ),
           ),
         ],

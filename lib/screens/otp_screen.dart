@@ -19,7 +19,6 @@ class _MyOtpState extends State<MyOtp> {
 
   @override
   Widget build(BuildContext context) {
-    auth.currentUser!.uid;
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,

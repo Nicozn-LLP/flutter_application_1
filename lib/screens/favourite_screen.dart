@@ -1,73 +1,110 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../itrm_details.dart';
+import '../utils.dart/item_box.dart';
 
-class FavouriteScreen extends StatelessWidget {
+class FavouriteScreen extends StatefulWidget {
   const FavouriteScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    List<Widget> items = [];
-    items.add(ItemContainer(
-      imageUrl1:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      imageUrl2:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      name1: '',
-      name2: '',
-    ));
-    items.add(ItemContainer(
-      imageUrl1:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      imageUrl2:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      name1: '',
-      name2: '',
-    ));
-    items.add(ItemContainer(
-      imageUrl1:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      imageUrl2:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      name1: '',
-      name2: '',
-    ));
-    items.add(ItemContainer(
-      imageUrl1:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      imageUrl2:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvORd7vfF74tltspL7oVQ4k6PWco6Ebmy9Bg&usqp=CAU',
-      name1: '',
-      name2: '',
-    ));
+  State<FavouriteScreen> createState() => _FavouriteScreenState();
+}
 
+class _FavouriteScreenState extends State<FavouriteScreen> {
+  late final User? currentUser = FirebaseAuth.instance.currentUser;
+  late final Query bookmarksRef = FirebaseFirestore.instance
+      .collection('bookmarks')
+      .where('userid', isEqualTo: currentUser?.uid);
+  late final CollectionReference productsQuery =
+      FirebaseFirestore.instance.collection('products');
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Container(
           child: Center(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 0, top: 20),
-              child: Text(
-                'My Favourites!',
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.bold, // Make the text bold
-                  fontSize: 25,
+            child: Column(
+              children: [
+                StreamBuilder<QuerySnapshot>(
+                  stream: bookmarksRef.snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    }
+
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    }
+
+                    final documents = snapshot.data!.docs;
+
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 10.0,
+                          crossAxisSpacing: 10.0,
+                          childAspectRatio: 0.95,
+                        ),
+                        itemCount: documents.length,
+                        itemBuilder: (context, index) {
+                          final document = documents[index];
+                          final data = document.data() as Map<String, dynamic>;
+
+                          final productId = data['productid'];
+
+                          return StreamBuilder<DocumentSnapshot>(
+                            stream: productsQuery.doc(productId).snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              }
+
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Text('Loading');
+                              }
+                              final productData =
+                                  snapshot.data!.data() as Map<String, dynamic>;
+                              // final productDocument = documents[index];
+
+                              final productBrand = productData['brand'];
+                              final productModel = productData['model'];
+                              final productImageUrl = productData['imageUrl'];
+                              final productLocation = productData['location'];
+                              final productPrice = productData['price'];
+                              final productDocumentId = productId;
+
+                              return ItemBox(
+                                brand: productBrand,
+                                model: productModel,
+                                imageUrl: productImageUrl,
+                                location: productLocation,
+                                productPrice: productPrice,
+                                documentId: productDocumentId,
+                                isBookmarked: true,
+                                onBookmarkChanged: (isBookmarked, _) {
+                                  // Handle bookmark changes here (if needed)
+                                },
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    );
+                  },
                 ),
-              ),
+              ],
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  children: items,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

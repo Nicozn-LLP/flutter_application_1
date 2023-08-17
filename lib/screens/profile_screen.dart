@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:renttt/screens/about.dart';
 import 'package:renttt/screens/details.dart';
@@ -41,24 +43,10 @@ class ProfileScreen extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Row(
                       children: [
-                        SizedBox(width: 10), // Adjust the spacing here
-                        Container(
-                          width: 60,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.grey,
-                            image: DecorationImage(
-                              image: AssetImage('assets/images/photo.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 10), // Adjust the spacing here
-                        Text(
-                          'James Dsouza',
-                          style: TextStyle(fontSize: 16),
-                        ),
+                        // Adjust the spacing here
+                        SizedBox(width: 100),
+
+                        UserDisplayNameWidget(), // Display user's name
                       ],
                     ),
                   ),
@@ -154,6 +142,49 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class UserDisplayNameWidget extends StatefulWidget {
+  @override
+  _UserDisplayNameWidgetState createState() => _UserDisplayNameWidgetState();
+}
+
+class _UserDisplayNameWidgetState extends State<UserDisplayNameWidget> {
+  late final uid = FirebaseAuth.instance.currentUser!.uid;
+  late final ref = FirebaseFirestore.instance.collection('Users').doc(uid);
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<DocumentSnapshot>(
+      future: ref.get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasError) {
+            return Text("Error: ${snapshot.error}");
+          }
+
+          if (snapshot.data != null) {
+            Map<String, dynamic> data =
+                snapshot.data!.data() as Map<String, dynamic>;
+
+            String firstName = data['first_name'] ?? '';
+            String lastName = data['last_name'] ?? '';
+
+            String fullName = '$firstName $lastName';
+
+            return Text(
+              fullName,
+              style: TextStyle(fontSize: 16),
+            );
+          }
+        }
+
+        // Return an empty container when there's no data to display
+        return Container();
+      },
     );
   }
 }

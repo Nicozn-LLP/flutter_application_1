@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:renttt/routes/app_routes.dart';
@@ -28,7 +30,21 @@ class WelcomePage extends StatelessWidget {
               height: 45,
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  final user = FirebaseAuth.instance.currentUser;
+                  if (user != null) {
+                    final doc = (await FirebaseFirestore.instance
+                        .collection('Users')
+                        .doc(user.uid)
+                        .get());
+
+                    if (doc.exists) {
+                      Navigator.pushNamed(context, AppRoutes.bottombar);
+                      return;
+                    }
+                    Navigator.pushNamed(context, AppRoutes.register);
+                  }
+
                   Navigator.pushNamed(context, AppRoutes.phone);
                 },
                 child: Text("Let's get started"),

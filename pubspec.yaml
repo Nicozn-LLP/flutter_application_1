@@ -33,7 +33,7 @@ dependencies:
   flutter_svg: ^0.22.0
   image_picker: ^0.8.4+3
   file_picker: ^4.0.0
-  url_launcher: ^6.1.11
+  url_launcher: ^6.0.9
   pinput: ^2.2.31
 
 
