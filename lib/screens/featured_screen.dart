@@ -38,7 +38,7 @@ class _FeaturedScreenState extends State<FeaturedScreen> {
               child: Row(
                 children: [
                   Text(
-                    'HOT DEALS',
+                    'Hot Deals',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -120,7 +120,7 @@ class _FeaturedScreenState extends State<FeaturedScreen> {
               child: Row(
                 children: [
                   Text(
-                    'FRESH PICKS',
+                    'Fresh Picks',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -129,7 +129,7 @@ class _FeaturedScreenState extends State<FeaturedScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 10.0),
+            SizedBox(height: 20.0),
             StreamBuilder<QuerySnapshot>(
               stream:
                   FirebaseFirestore.instance.collection('products').snapshots(),

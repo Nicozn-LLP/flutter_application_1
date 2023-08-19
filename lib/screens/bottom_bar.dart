@@ -42,7 +42,7 @@ class _BottombarState extends State<Bottombar> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
-        title: Text("RentEasy"),
+        title: Text("RENT-EASY"),
         actions: [],
       ),
       body: PageView(
