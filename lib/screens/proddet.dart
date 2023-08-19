@@ -16,9 +16,10 @@ class Productdetails extends StatefulWidget {
 }
 
 Future<void> _launchUrl(String url) async {
-  if (!await launchUrl(Uri.parse(url))) {
+  if (!await canLaunch(url)) {
     throw Exception('Could not launch $url');
   }
+  await launch(url);
 }
 
 class _ProductdetailsState extends State<Productdetails> {
@@ -29,225 +30,267 @@ class _ProductdetailsState extends State<Productdetails> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Colors.black,
-            )),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Colors.black,
+          ),
+        ),
       ),
       body: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection('products')
-              .doc(widget.productId)
-              .snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              // Handle error
-              return Text('Error: ${snapshot.error}');
-            }
+        stream: FirebaseFirestore.instance
+            .collection('products')
+            .doc(widget.productId)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            // Handle error
+            return Text('Error: ${snapshot.error}');
+          }
 
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              // Display a loading indicator while waiting for data
-              return CircularProgressIndicator();
-            }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            // Display a loading indicator while waiting for data
+            return CircularProgressIndicator();
+          }
 
-            final document = snapshot.data;
-            final data = document!.data() as Map<String, dynamic>;
+          final document = snapshot.data;
+          final data = document!.data() as Map<String, dynamic>;
 
-            final brand = data['brand'];
-            final model = data['model'];
-            final imageUrl = data['imageUrl'];
-            final location = data['location'];
-            final price = data['price'];
-            final features = data['feature'];
-            final description = data['description'];
-            final userId = data['userId'];
+          final brand = data['brand'];
+          final model = data['model'];
+          final imageUrl = data['imageUrl'];
+          final location = data['location'];
+          final price = data['price'];
+          final features = data['feature'];
+          final description = data['description'];
+          final userId = data['userId'];
 
-            return Container(
-              color: Colors.white,
-              child: Stack(
+          return Container(
+            color: Colors.white,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Positioned(
-                    left: 20,
-                    top: 30,
-                    child: Text(
-                      model,
-                      style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 28,
-                        letterSpacing: 0.02,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 20,
-                    top: 70,
-                    child: Text(
-                      brand,
-                      style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20,
-                        letterSpacing: 0.02,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 20,
-                    top: 140,
-                    child: Container(
-                      width: 320,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        image: DecorationImage(
-                          image: NetworkImage(imageUrl),
-                          fit: BoxFit.cover,
+                  // Product Image and Details
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          model,
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 28,
+                            letterSpacing: 0.02,
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 20,
-                    top: 380,
-                    child: Text(
-                      'Description',
-                      style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                        letterSpacing: 0.02,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 20,
-                    top: 410,
-                    child: Text(
-                      description,
-                      style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 15,
-                        letterSpacing: 0.02,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 20,
-                    top: 450,
-                    child: Text(
-                      'Features',
-                      style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                        letterSpacing: 0.02,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 20,
-                    top: 480,
-                    child: Text(
-                      features,
-                      style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15,
-                        letterSpacing: 0.02,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 0,
-                    top: 550,
-                    child: Container(
-                      width: 412,
-                      height: 100,
-                      color: Color(0xFF16161A),
-                    ),
-                  ),
-                  Positioned(
-                    left: 50,
-                    top: 575,
-                    child: Container(
-                      width: 99,
-                      height: 47,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Price',
-                            style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15,
-                              letterSpacing: 0.02,
-                              color: Color(0xFF94A1B2),
+                        SizedBox(height: 5),
+                        Text(
+                          brand,
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20,
+                            letterSpacing: 0.02,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Container(
+                          width: double.infinity,
+                          height: 200,
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                            image: DecorationImage(
+                              image: NetworkImage(imageUrl),
+                              fit: BoxFit.cover,
                             ),
                           ),
-                          Text(
-                            price,
-                            style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 15,
-                              letterSpacing: 0.02,
-                              color: Colors.white,
-                            ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'Description',
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            letterSpacing: 0.02,
+                            color: Colors.black,
                           ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          description,
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                            letterSpacing: 0.02,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'Features',
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            letterSpacing: 0.02,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          features,
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                            letterSpacing: 0.02,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'location', // Display the location
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            letterSpacing: 0.02,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          location, // Display the location
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                            letterSpacing: 0.02,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'Price', // Display the price
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            letterSpacing: 0.02,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          '₹$price', // Display the price with the currency symbol
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                            letterSpacing: 0.02,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                      ],
                     ),
                   ),
-                  Positioned(
-                    left: 250,
-                    top: 575,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        final userSnapshot = await FirebaseFirestore.instance
-                            .collection('Users')
-                            .doc(userId)
-                            .get();
-                        if (userSnapshot.exists) {
-                          final userData =
-                              userSnapshot.data() as Map<String, dynamic>;
-                          final Phone = userData['phone'];
-                          print(Phone);
-                          await _launchUrl('tel:$Phone');
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+
+                  // User Profile and Contact
+                  StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection('Users')
+                        .doc(userId)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        // Handle error
+                        return Text('Error: ${snapshot.error}');
+                      }
+
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        // Display a loading indicator while waiting for data
+                        return CircularProgressIndicator();
+                      }
+
+                      final userDocument = snapshot.data;
+                      final userData =
+                          userDocument!.data() as Map<String, dynamic>;
+                      final userPicture = userData['profileUrl'];
+                      final firstName = userData['first_name'];
+                      final lastName = userData['last_name'];
+                      final userPhone = userData['phone'];
+
+                      return Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                        decoration: BoxDecoration(
+                          color: Colors.black,
                         ),
-                        primary: primaryColor, // Set the button color to black
-                      ),
-                      child: const Text(
-                        'Call Now',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage: NetworkImage(userPicture),
+                                ),
+                                SizedBox(width: 10),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '$firstName $lastName',
+                                      style: TextStyle(
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 20,
+                                        letterSpacing: 0.02,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Spacer(),
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    await _launchUrl('tel:$userPhone');
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    backgroundColor: primaryColor,
+                                  ),
+                                  child: Text(
+                                    'Call Now',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
-            );
-          }),
+            ),
+          );
+        },
+      ),
     );
   }
 }
-
-// const phoneNumber = '8050242047';
-// const url = 'tel:$phoneNumber';
-// _launchUrl(url);

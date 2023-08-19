@@ -1,72 +1,121 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:renttt/utils.dart/item_box.dart';
+import 'package:renttt/utils.dart/searching_bar.dart';
 
-class FashionScreen extends StatelessWidget {
-  final String category;
+class FashionScreen extends StatefulWidget {
+  @override
+  _FashionScreenState createState() => _FashionScreenState();
+}
 
-  const FashionScreen({Key? key, required this.category}) : super(key: key);
+class _FashionScreenState extends State<FashionScreen> {
+  late String _searchText;
+  late List<QueryDocumentSnapshot> _allDocuments;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchText = '';
+    _allDocuments = [];
+    _loadAllDocuments();
+  }
+
+  void _loadAllDocuments() async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('products')
+        .where('category', whereIn: ['Apparels', 'Events']).get();
+
+    setState(() {
+      _allDocuments = snapshot.docs;
+    });
+  }
+
+  void _updateSearchText(String searchText) {
+    setState(() {
+      _searchText = searchText;
+    });
+  }
+
+  List<QueryDocumentSnapshot> getFilteredDocuments() {
+    if (_searchText.isEmpty) {
+      return _allDocuments;
+    } else {
+      final List<QueryDocumentSnapshot> filteredDocuments = [];
+
+      for (final document in _allDocuments) {
+        final data = document.data() as Map<String, dynamic>;
+        final brand = data['brand'] as String;
+        final model = data['model'] as String;
+
+        if (brand.toLowerCase().contains(_searchText.toLowerCase())) {
+          filteredDocuments.add(document);
+        }
+        if (model.toLowerCase().contains(_searchText.toLowerCase())) {
+          filteredDocuments.add(document);
+        }
+      }
+
+      return filteredDocuments;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final filteredDocuments = getFilteredDocuments();
+
     return Scaffold(
-      body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('products').where(
-                'category',
-                whereIn: ['Apparels', 'Events']) // Filter by type (Bike or Car)
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          }
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              SearchingBar(onTextChanged: _updateSearchText),
+              SizedBox(height: 20.0),
+              GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10.0,
+                  crossAxisSpacing: 10.0,
+                  childAspectRatio: 0.95,
+                ),
+                itemCount: filteredDocuments.length,
+                itemBuilder: (context, index) {
+                  final document = filteredDocuments[index];
+                  final data = document.data() as Map<String, dynamic>;
 
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
-          }
+                  final brand = data['brand'];
+                  final model = data['model'];
+                  final imageUrl = data['imageUrl'];
+                  final location = data['location'];
+                  final price = data['price'];
+                  final documentId = document.id;
 
-          final documents = snapshot.data!.docs;
-
-          return GridView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10.0,
-              crossAxisSpacing: 10.0,
-              childAspectRatio: 0.95,
-            ),
-            itemCount: documents.length,
-            itemBuilder: (context, index) {
-              final document = documents[index];
-              final data = document.data() as Map<String, dynamic>;
-
-              // Extract vehicle data
-              final brand = data['brand'];
-              final model = data['model'];
-              final imageUrl = data['imageUrl'];
-              final location = data['location'];
-              final price = data['price'];
-              final documentId = document.id;
-
-              return ItemBox(
-                brand: brand,
-                model: model,
-                imageUrl: imageUrl,
-                location: location,
-                productPrice: price,
-                documentId: documentId,
-                isBookmarked: data['isBookmarked'] ?? false,
-                onBookmarkChanged: (isBookmarked, sss) {
-                  // Handle bookmark changes here (e.g., update Firestore)
-                  onBookmarkChanged(isBookmarked, documentId);
+                  return ItemBox(
+                    brand: brand,
+                    model: model,
+                    imageUrl: imageUrl,
+                    location: location,
+                    productPrice: price,
+                    documentId: documentId,
+                    isBookmarked: data['isBookmarked'] ?? false,
+                    onBookmarkChanged: (isBookmarked, sss) {
+                      // Handle bookmark changes here (e.g., update Firestore)
+                      onBookmarkChanged(isBookmarked, documentId);
+                    },
+                  );
                 },
-              );
-            },
-          );
-        },
+              ),
+              SizedBox(height: 20.0),
+            ],
+          ),
+        ),
       ),
     );
   }
 
-  void onBookmarkChanged(bool isBookmarked, String documentId) {}
+  void onBookmarkChanged(bool isBookmarked, String documentId) {
+    // Implement your bookmark functionality here
+  }
 }
